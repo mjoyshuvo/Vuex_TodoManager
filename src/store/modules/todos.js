@@ -15,10 +15,16 @@ const actions = {
         );
         commit("setTodos", response.data);
     },
+    async addTodo({ commit }, title) {
+        const response = await axios.post('https://jsonplaceholder.typicode.com/todos', 
+        {title, completed: false});
+        commit('newTodo', response.data);
+    }
 };
 
 const mutations = {
     setTodos: (state, todos) => (state.todos = todos),
+    newTodo: (state, newtodo) => state.todos.unshift(newtodo)
 };
 
 export default {
